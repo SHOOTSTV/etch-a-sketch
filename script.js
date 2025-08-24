@@ -39,7 +39,7 @@ function createGridSquare(gridSize) {
   square.classList.add("square");
   square.style.flex = `1 0 ${100 / gridSize}%`; // gives each square an even space on the grid
   square.style.boxSizing = "border-box";
-  square.style.border = "1px solid #ccc";
+  square.style.border = "1px solid rgba(255, 255, 255, 0.1)";
   gridContainer.appendChild(square);
   return square;
 }
