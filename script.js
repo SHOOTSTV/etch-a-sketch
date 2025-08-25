@@ -2,11 +2,8 @@ const gridContainer = document.querySelector(".grid");
 const gridSizeButton = document.querySelector("#size-btn");
 
 const DEFAULT_GRID_SIZE = 16;
-let userGridSize = undefined;
 
-renderGrid();
-
-function renderGrid() {
+function renderGrid(userGridSize) {
   // reset the grid before building it
   gridContainer.innerHTML = "";
   const gridSize = userGridSize || DEFAULT_GRID_SIZE;
@@ -14,17 +11,6 @@ function renderGrid() {
     createGridSquare(gridSize);
   }
 }
-
-// on hover fill the square with a random rgb color
-gridContainer.addEventListener(
-  "mouseenter",
-  (event) => {
-    if (event.target.classList.contains("square")) {
-      event.target.style.backgroundColor = generateRandomRGBColor();
-    }
-  },
-  true
-);
 
 function generateRandomRGBColor() {
   return `rgb(
@@ -44,12 +30,23 @@ function createGridSquare(gridSize) {
   return square;
 }
 
+// on hover fill the square with a random rgb color
+gridContainer.addEventListener(
+  "mouseenter",
+  (event) => {
+    if (event.target.classList.contains("square")) {
+      event.target.style.backgroundColor = generateRandomRGBColor();
+    }
+  },
+  true
+);
+
 gridSizeButton.addEventListener("click", () => {
   const size = parseInt(prompt("Enter a grid size (max 100):"));
   if (size && size > 0 && size <= 100) {
-    userGridSize = size;
-    renderGrid();
+    renderGrid(size);
   } else {
     alert("Please enter a valid number between 1 and 100.");
   }
 });
+renderGrid();
